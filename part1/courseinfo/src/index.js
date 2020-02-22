@@ -2,27 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const App = () => {
-  const course = 'Half stack application development';
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7 
-    },
-    {
-      name: 'State of a component',
-      exercises: 14
-    }
-  ]
+  const course = {
+    name: 'Half stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
   return (
     <div>
-      <Header name={course} />
-      <Content parts={parts} />
-      <Total parts={parts} />
+      <Header name={course.name} />
+      <Content course={course} />
+      <Total course={course} />
     </div>
   )
 };
@@ -32,14 +34,14 @@ const Header = ({ name }) => (
 );
 
 
-const Content = ({ parts }) => (
+const Content = ({ course }) => (
   <>
-    { parts.map((course, i) => <p key={i}>{course.name} {course.exercises}</p>) }
+    { course.parts.map((course, i) => <p key={i}>{course.name} {course.exercises}</p>) }
   </>
 );
 
-const Total = ({ parts }) => {
-  const sum = parts.reduce((exerciseCount, course) => exerciseCount + course.exercises, 0)
+const Total = ({ course }) => {
+  const sum = course.parts.reduce((exerciseCount, course) => exerciseCount + course.exercises, 0)
   return (
     <p>Number of exercises {sum}</p>
   );
