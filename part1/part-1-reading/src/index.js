@@ -12,19 +12,23 @@ const Hello = ({ name, age }) => {
   )
 }
 
+const Display = ({ counter }) => <div>{counter}</div>;
+const Button = ({onClick, text}) => (
+  <button onClick={onClick}>
+    {text}
+  </button>
+);
+
 const Counter = () => {
   const [ counter, setCounter ] = useState(0);
-  const increaseByOne = () => setCounter(counter + 1);
-  const setToZero = () => setCounter(0);
   const setToValue = value => setCounter(value);
 
   return (
-    <div>
-      { counter }
-      <br />
-      <button onClick={() => setToValue(counter + 1)}>+1</button>
-      <button onClick={() => setToValue(0)}>Reset</button>
-    </div>
+    <>
+      <Display counter={counter} />
+      <Button onClick={() => setToValue(counter + 1)} text='plus' />
+      <Button onClick={() => setToValue(0)} text='zero' />
+    </>
   )
 }
 
