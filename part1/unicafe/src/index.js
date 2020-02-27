@@ -11,6 +11,7 @@ const App = () => {
     bad
   };
 
+
   return (
     <>
       <h1>Give Feedback</h1>
@@ -26,16 +27,25 @@ const Button = ({onClick, text}) => (
   <button onClick={onClick}>{text}</button>
 );
 
-const Stats = ({feedback}) => (
-  <>
-    <h2>Statistics</h2>
-    <ul>
-      <li>Good: { feedback.good }</li>
-      <li>Neutral: { feedback.neutral }</li>
-      <li>Bad: { feedback.bad }</li>
-    </ul>
-  </>
-);
+const Stats = ({feedback}) => {
+  const feedbackTotal = Object.values(feedback).reduce((sum, count) => sum + count, 0) 
+  const feedbackAverage = feedbackTotal > 0 ? ((feedback.good - feedback.bad) / feedbackTotal) : 0;
+  const positivePercentage = feedbackTotal > 0 ? (feedback.good / feedbackTotal) * 100 : 0;
+
+  return (
+    <>
+      <h2>Statistics</h2>
+      <ul>
+        <li>Good: { feedback.good }</li>
+        <li>Neutral: { feedback.neutral }</li>
+        <li>Bad: { feedback.bad }</li>
+        <li>All: { feedbackTotal }</li>
+        <li>Average: { feedbackAverage.toFixed(2) }</li>
+        <li>Percent Positive: { `${positivePercentage.toFixed(2)}%` }</li>
+      </ul>
+    </>
+  )
+};
 
 ReactDOM.render(<App />,
   document.getElementById('root')
