@@ -28,7 +28,10 @@ const Button = ({onClick, text}) => (
 );
 
 const Statistic = ({ name, amount}) => (
-  <li>{name}: {amount}</li>
+  <tr>
+    <td>{name}</td>
+    <td>{amount}</td>
+  </tr>
 )
 
 const Stats = ({feedback}) => {
@@ -41,16 +44,18 @@ const Stats = ({feedback}) => {
       <h2>Statistics</h2>
       {
         feedbackTotal > 0 ?
-          <ul>
-            <Statistic name="Good" amount={feedback.good} />
-            <Statistic name="Neutral" amount={feedback.neutral} />
-            <Statistic name="Bad" amount={feedback.bad} />
-            <Statistic name="All" amount={feedbackTotal} />
-            <Statistic name="Average" amount={feedbackAverage.toFixed(2)} />
-            <Statistic name="Percent Positive" amount={`${positivePercentage.toFixed(2)}%`} />
-          </ul>
+          <table>
+            <tbody>
+              <Statistic name="Good" amount={feedback.good} />
+              <Statistic name="Neutral" amount={feedback.neutral} />
+              <Statistic name="Bad" amount={feedback.bad} />
+              <Statistic name="All" amount={feedbackTotal} />
+              <Statistic name="Average" amount={feedbackAverage.toFixed(2)} />
+              <Statistic name="Percent Positive" amount={`${positivePercentage.toFixed(2)}%`} />
+            </tbody>
+          </table>
           :
-        "No feedback given"
+          "No feedback given"
       }
     </>
   )
