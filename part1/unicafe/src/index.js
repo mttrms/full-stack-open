@@ -27,6 +27,10 @@ const Button = ({onClick, text}) => (
   <button onClick={onClick}>{text}</button>
 );
 
+const Statistic = ({ name, amount}) => (
+  <li>{name}: {amount}</li>
+)
+
 const Stats = ({feedback}) => {
   const feedbackTotal = Object.values(feedback).reduce((sum, count) => sum + count, 0);
   const feedbackAverage = (feedback.good - feedback.bad) / feedbackTotal;
@@ -38,12 +42,12 @@ const Stats = ({feedback}) => {
       {
         feedbackTotal > 0 ?
           <ul>
-            <li>Good: { feedback.good }</li>
-            <li>Neutral: { feedback.neutral }</li>
-            <li>Bad: { feedback.bad }</li>
-            <li>All: { feedbackTotal }</li>
-            <li>Average: { feedbackAverage.toFixed(2) }</li>
-            <li>Percent Positive: { `${positivePercentage.toFixed(2)}%` }</li>
+            <Statistic name="Good" amount={feedback.good} />
+            <Statistic name="Neutral" amount={feedback.neutral} />
+            <Statistic name="Bad" amount={feedback.bad} />
+            <Statistic name="All" amount={feedbackTotal} />
+            <Statistic name="Average" amount={feedbackAverage.toFixed(2)} />
+            <Statistic name="Percent Positive" amount={`${positivePercentage.toFixed(2)}%`} />
           </ul>
           :
         "No feedback given"
