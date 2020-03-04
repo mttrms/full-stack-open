@@ -5,6 +5,9 @@ const App = props => {
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState([0, 0, 0, 0, 0, 0]);
   const randomNum = () => Math.floor(Math.random() * anecdotes.length);
+  const highestVoteCount = Math.max(...votes);
+  const highestVoteCountIdx = votes.indexOf(Math.max(...votes));
+  const topVotedAnecdote = anecdotes[highestVoteCountIdx];
 
   const upvote = id => {
     const copy = [...votes];
@@ -20,6 +23,15 @@ const App = props => {
       <br />
       <button onClick={() => setSelected(randomNum)}>get random</button>
       <button onClick={() => upvote(selected)}>Vote</button>
+      <h2>Anecdote with most votes</h2>
+      {
+        highestVoteCount === 0 ?
+          <p>No votes yet</p> :
+          <>
+            <p>{topVotedAnecdote.text}</p>
+            <p>has {highestVoteCount} votes</p>
+          </>
+      }
     </div>
   )
 };
